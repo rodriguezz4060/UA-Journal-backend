@@ -31,7 +31,7 @@ export class PostController {
 	@Patch(':id')
 	update(
 		@User() userId: number,
-		@Param('id') id: string,
+		@Param('id') id: number,
 		@Body() updatePostDto: UpdatePostDto
 	) {
 		return this.postService.update(+id, updatePostDto, userId)
@@ -41,7 +41,7 @@ export class PostController {
 	@Patch(':id/rating')
 	changeRating(
 		@User() userId: number,
-		@Param('id') id: string,
+		@Param('id') id: number,
 		@Body('increment') increment: number
 	) {
 		return this.postService.changeRating(+id, increment, userId)
@@ -62,7 +62,7 @@ export class PostController {
 
 	@UseGuards(JwtAuthGuard)
 	@Delete(':id')
-	remove(@User() userId: number, @Param('id') id: string) {
+	remove(@User() userId: number, @Param('id') id: number) {
 		return this.postService.remove(+id, userId)
 	}
 
@@ -82,7 +82,7 @@ export class PostController {
 	}
 
 	@Get(':id')
-	findOne(@Param('id') id: string) {
+	findOne(@Param('id') id: number) {
 		return this.postService.findOne(+id)
 	}
 }

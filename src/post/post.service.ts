@@ -196,6 +196,13 @@ export class PostService {
 			throw new NotFoundException('Статья не найдена')
 		}
 
+		// Check if the user has permission to update the post
+		if (find.user.id !== userId) {
+			throw new ForbiddenException(
+				'У вас нет прав для редактирования этой статьи'
+			)
+		}
+
 		const firstParagraph = dto.body.find(obj => obj.type === 'paragraph')?.data
 			?.text
 
